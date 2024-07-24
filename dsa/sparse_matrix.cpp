@@ -6,6 +6,8 @@ int main(){
 	cin>>r>>c;
 	int arr[r][c];
 	cout<<"Enter the elements of the matrix: "<<endl;
+
+	
 	for(int i=0;i<r;i++){
 		cout<<"\nRow no."<<i+1<<": ";
 		for(int j=0;j<c;j++){
