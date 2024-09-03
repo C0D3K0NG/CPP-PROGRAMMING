@@ -61,7 +61,7 @@ string infixToPostfix(string infix) {
             postfix += ch;
         }
         else if (ch == ')') {  // Added handling for ')'
-            while (arr[top] != '(') {
+            while (top == -1 || arr[top] != '(') {
                 postfix += arr[top];
                 pop();
             }
