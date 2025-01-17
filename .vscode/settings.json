@@ -1,7 +1,8 @@
 {
   "files.associations": {
     "iostream": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "type_traits": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "codium.codeCompletion.enable": false
