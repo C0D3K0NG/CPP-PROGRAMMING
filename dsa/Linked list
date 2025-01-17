@@ -1,0 +1,164 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+// Function to insert a node at the end
+void insertAtEnd(Node*& head, int data) {
+    Node* newNode = new Node();
+    newNode->data = data;
+    newNode->next = nullptr;
+
+    if (head == nullptr) {
+        head = newNode;
+        return;
+    }
+
+    Node* temp = head;
+    while (temp->next != nullptr) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+// Function to insert a node at the beginning
+void insertAtBeginning(Node*& head, int data) {
+    Node* newNode = new Node();
+    newNode->data = data;
+    newNode->next = head;
+    head = newNode;
+}
+
+// Function to insert a node at the k-th position
+void insertAtKthPosition(Node*& head, int data, int k) {
+    Node* newNode = new Node();
+    newNode->data = data;
+
+    if (k == 1) {
+        newNode->next = head;
+        head = newNode;
+        return;
+    }
+
+    Node* temp = head;
+    for (int i = 1; i < k - 1 && temp != nullptr; i++) {
+        temp = temp->next;
+    }
+
+    if (temp == nullptr) {
+        cout << "Position out of range." << endl;
+        delete newNode;
+        return;
+    }
+
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+// Function to delete the last node
+void deleteAtEnd(Node*& head) {
+    if (head == nullptr) {
+        cout << "List is already empty." << endl;
+        return;
+    }
+    if (head->next == nullptr) {
+        delete head;
+        head = nullptr;
+        return;
+    }
+
+    Node* temp = head;
+    while (temp->next->next != nullptr) {
+        temp = temp->next;
+    }
+
+    delete temp->next;
+    temp->next = nullptr;
+}
+
+// Function to delete the first node
+void deleteAtBeginning(Node*& head) {
+    if (head == nullptr) {
+        cout << "List is already empty." << endl;
+        return;
+    }
+    Node* temp = head;
+    head = head->next;
+    delete temp;
+}
+
+// Function to print the linked list
+void printList(Node* head) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " -> ";
+        temp = temp->next;
+    }
+    cout << "nullptr" << endl;
+}
+
+// Menu-driven program
+int main() {
+    Node* head = nullptr;
+    int choice, data, k;
+
+    while (true) {
+        cout << "\nMenu:\n";
+        cout << "1. Insert at end\n";
+        cout << "2. Insert at beginning\n";
+        cout << "3. Insert at k-th position\n";
+        cout << "4. Delete at end\n";
+        cout << "5. Delete at beginning\n";
+        cout << "6. Display list\n";
+        cout << "7. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter data to insert at end: ";
+                cin >> data;
+                insertAtEnd(head, data);
+                break;
+
+            case 2:
+                cout << "Enter data to insert at beginning: ";
+                cin >> data;
+                insertAtBeginning(head, data);
+                break;
+
+            case 3:
+                cout << "Enter data to insert: ";
+                cin >> data;
+                cout << "Enter position (k): ";
+                cin >> k;
+                insertAtKthPosition(head, data, k);
+                break;
+
+            case 4:
+                deleteAtEnd(head);
+                break;
+
+            case 5:
+                deleteAtBeginning(head);
+                break;
+
+            case 6:
+                cout << "Current List: ";
+                printList(head);
+                break;
+
+            case 7:
+                cout << "Exiting program." << endl;
+                return 0;
+
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+        }
+    }
+
+    return 0;
+}
